@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Get Connected — Matrovix</title>
+  <meta name="description" content="Get in touch with Matrovix.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="lattice" aria-hidden="true"></div>
+  <main class="center">
+    <a href="./" class="home-link" aria-label="Back to Matrovix home">
+      <svg class="mark" width="44" height="44" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 2 29 9.5v13L16 30 3 22.5v-13Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M9 21V11l7 6 7-6v10" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+      </svg>
+    </a>
+    <h1 class="h1-small">Get connected</h1>
+    <p class="soon">Tell us a little about yourself and we'll be in touch.</p>
+
+    <form id="connect-form" class="form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="WEB3FORMS_ACCESS_KEY">
+      <input type="hidden" name="subject" value="New connection request from matrovix.com">
+      <input type="hidden" name="from_name" value="Matrovix website">
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+
+      <label>Name
+        <input type="text" name="name" required autocomplete="name">
+      </label>
+      <label>Email
+        <input type="email" name="email" required autocomplete="email">
+      </label>
+      <label><span>Organization <span class="opt">(optional)</span></span>
+        <input type="text" name="organization" autocomplete="organization">
+      </label>
+      <label>Message
+        <textarea name="message" rows="5" required></textarea>
+      </label>
+
+      <button type="submit" class="btn">Send message</button>
+      <p id="form-status" class="status" role="status" aria-live="polite"></p>
+    </form>
+  </main>
+  <footer>© <span id="year">2026</span> Matrovix</footer>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const form = document.getElementById('connect-form');
+    const status = document.getElementById('form-status');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const button = form.querySelector('button');
+      button.disabled = true;
+      status.className = 'status';
+      status.textContent = 'Sending…';
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        });
+        const data = await res.json();
+        if (!data.success) throw new Error(data.message);
+        form.reset();
+        status.className = 'status ok';
+        status.textContent = 'Thank you! Your message has been sent. We\'ll be in touch soon.';
+      } catch (err) {
+        status.className = 'status err';
+        status.textContent = 'Sorry, something went wrong. Please try again in a moment.';
+      } finally {
+        button.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

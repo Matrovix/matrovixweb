@@ -3,27 +3,108 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Matrovix — Coming Soon</title>
-  <meta name="description" content="Matrovix — Materials Innovation. Coming soon.">
+  <title>Matrovix — Materials Innovation</title>
+  <meta name="description" content="Matrovix is a materials innovation company developing the next generation of advanced materials.">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="lattice" aria-hidden="true"></div>
-  <main class="center">
-    <svg class="mark" width="64" height="64" viewBox="0 0 32 32" aria-hidden="true">
-      <path d="M16 2 29 9.5v13L16 30 3 22.5v-13Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-      <path d="M9 21V11l7 6 7-6v10" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-    </svg>
-    <h1>Matrovix</h1>
-    <p class="tagline">Materials Innovation</p>
-    <p class="soon">Coming soon</p>
-    <a class="btn" href="mailto:matrovix01@gmail.com?subject=Connecting%20with%20Matrovix">Get connected</a>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="#" class="logo" aria-label="Matrovix home">
+        <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><use href="#mark"/></svg>
+        <span>Matrovix</span>
+      </a>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#focus">Focus</a>
+        <a href="#contact" class="btn btn-small">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="lattice" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <p class="eyebrow">Now launching</p>
+        <h1>Engineering the materials<br>of what comes next.</h1>
+        <p class="lead">Matrovix is a materials innovation company. We design, develop and scale advanced materials that make products stronger, lighter and more sustainable.</p>
+        <div class="cta">
+          <a href="#contact" class="btn">Get in touch</a>
+          <a href="#focus" class="btn btn-ghost">What we do</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container two-col">
+        <div>
+          <p class="eyebrow">About</p>
+          <h2>From the lab to real-world impact.</h2>
+        </div>
+        <div>
+          <p>Breakthrough products start with breakthrough materials. Matrovix brings together materials science, data-driven discovery and practical engineering to shorten the path from idea to application.</p>
+          <p>We partner with companies and researchers who need materials that perform better and last longer, with a smaller footprint.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="focus" class="section section-alt">
+      <div class="container">
+        <p class="eyebrow">Focus areas</p>
+        <h2>What we work on</h2>
+        <div class="grid">
+          <article class="card">
+            <div class="icon">◇</div>
+            <h3>Advanced materials</h3>
+            <p>High-performance composites, coatings and functional materials designed for demanding environments.</p>
+          </article>
+          <article class="card">
+            <div class="icon">◎</div>
+            <h3>Sustainable alternatives</h3>
+            <p>Lower-impact materials and processes that reduce waste, energy use and reliance on scarce inputs.</p>
+          </article>
+          <article class="card">
+            <div class="icon">△</div>
+            <h3>Data-driven discovery</h3>
+            <p>Computation and experimentation working together to find and validate promising materials faster.</p>
+          </article>
+          <article class="card">
+            <div class="icon">□</div>
+            <h3>Scale-up &amp; partnership</h3>
+            <p>Taking materials from prototype to production alongside partners who will put them to work.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container contact">
+        <p class="eyebrow">Contact</p>
+        <h2>Let's build what's next, together.</h2>
+        <p>Interested in partnering, investing or joining us? We'd love to hear from you.</p>
+        <a href="mailto:hello@matrovix.com" class="btn">hello@matrovix.com</a>
+      </div>
+    </section>
   </main>
-  <footer>© <span id="year">2026</span> Matrovix</footer>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>© <span id="year">2026</span> Matrovix. All rights reserved.</span>
+      <span>Materials Innovation</span>
+    </div>
+  </footer>
+
+  <svg width="0" height="0" style="position:absolute">
+    <symbol id="mark" viewBox="0 0 32 32">
+      <path d="M16 2 29 9.5v13L16 30 3 22.5v-13Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+      <path d="M9 21V11l7 6 7-6v10" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+    </symbol>
+  </svg>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>

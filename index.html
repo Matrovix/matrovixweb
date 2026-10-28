@@ -85,6 +85,7 @@
         status.className = 'status ok';
         status.textContent = thank;
       } catch (err) {
+        console.error('Contact form error:', err);
         status.className = 'status err';
         status.textContent = 'Sorry, something went wrong. Please try again in a moment.';
       } finally {

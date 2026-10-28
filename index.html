@@ -31,11 +31,7 @@
       <div class="container contact">
         <h2>Drop us a line!</h2>
 
-        <form id="contact-form" class="form" action="https://formsubmit.co/matrovix01@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="New contact from matrovix.com">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="https://matrovix.com/#thanks">
+        <form id="contact-form" class="form" action="https://script.google.com/macros/s/AKfycbzUHQ6Y47sXUX_00PvGY1wl_eEakjNUy938khZNdtB7ZYdaIPm0Ey6ezwA_umNBuIWSJQ/exec" method="POST">
           <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off">
 
           <input type="text" name="name" placeholder="Name" aria-label="Name" autocomplete="name">
@@ -79,13 +75,12 @@
       status.className = 'status';
       status.textContent = 'Sending…';
       try {
-        const res = await fetch(form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
+        const res = await fetch(form.action, {
           method: 'POST',
-          headers: { 'Accept': 'application/json' },
-          body: new FormData(form)
+          body: new URLSearchParams(new FormData(form))
         });
         const data = await res.json();
-        if (String(data.success) !== 'true') throw new Error(data.message);
+        if (!data.success) throw new Error(data.message);
         form.reset();
         status.className = 'status ok';
         status.textContent = thank;

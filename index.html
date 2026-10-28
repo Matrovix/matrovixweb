@@ -21,12 +21,29 @@
   </header>
 
   <main>
-    <section id="contact" class="section">
+    <section id="contact" class="section contact-section">
       <div class="container contact">
-        <p class="eyebrow">Contact</p>
-        <h2>Let's build what's next, together.</h2>
-        <p>Interested in partnering, investing or joining us? We'd love to hear from you.</p>
-        <a href="mailto:matrovix01@gmail.com" class="btn">matrovix01@gmail.com</a>
+        <h2>Drop us a line!</h2>
+
+        <form id="contact-form" class="form" action="https://formsubmit.co/matrovix01@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="New contact from matrovix.com">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://matrovix.com/#thanks">
+          <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off">
+
+          <input type="text" name="name" placeholder="Name" aria-label="Name" autocomplete="name">
+          <input type="email" name="email" placeholder="Email*" aria-label="Email" required autocomplete="email">
+          <textarea name="message" rows="7" placeholder="Message" aria-label="Message"></textarea>
+
+          <label class="check">
+            <input type="checkbox" name="email_list" value="Yes">
+            <span>Sign up for our email list for updates, promotions, and more.</span>
+          </label>
+
+          <button type="submit" class="btn-send">Send</button>
+          <p id="form-status" class="status" role="status" aria-live="polite"></p>
+        </form>
       </div>
     </section>
   </main>
@@ -38,6 +55,41 @@
     </div>
   </footer>
 
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+    const thank = 'Thank you! Your message has been sent. We\'ll be in touch soon.';
+    if (location.hash === '#thanks') {
+      status.className = 'status ok';
+      status.textContent = thank;
+      document.getElementById('contact').scrollIntoView();
+    }
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const button = form.querySelector('button');
+      button.disabled = true;
+      status.className = 'status';
+      status.textContent = 'Sending…';
+      try {
+        const res = await fetch(form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        });
+        const data = await res.json();
+        if (String(data.success) !== 'true') throw new Error(data.message);
+        form.reset();
+        status.className = 'status ok';
+        status.textContent = thank;
+      } catch (err) {
+        status.className = 'status err';
+        status.textContent = 'Sorry, something went wrong. Please try again in a moment.';
+      } finally {
+        button.disabled = false;
+      }
+    });
+  </script>
 </body>
 </html>
